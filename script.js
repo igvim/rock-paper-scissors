@@ -13,8 +13,6 @@ function getComputerChoice(){
     }
 }
 
-//let computerSelection = getComputerChoice();
-
 function oneRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection){
