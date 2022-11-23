@@ -1,5 +1,3 @@
-//let playerSelection = prompt('Rock, Paper, Scissors, and shoot:');
-
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3 + 1);
     switch (choice){
@@ -20,27 +18,55 @@ function getComputerChoice(){
 function oneRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection){
-        return 'Draw! Play again?';
+        console.log('Draw! Play again?')
+        return false;
     }
     else if (playerSelection === 'rock'){
         if (computerSelection === 'scissors'){
-            return 'You win! Rock beats scissors'
+            console.log('You win! Rock beats scissors')
+            return true;
         }
-        else return 'You lose! Paper covers rock'
+        else{
+            console.log('You lose! Paper covers rock')
+            return false;
+        }
     }
     else if (playerSelection === 'paper'){
         if (computerSelection === 'rock'){
-            return 'You win! Paper covers rock'
+            console.log('You win! Paper covers rock')
+            return true;
         }
-        else return 'You lose! Scissors cuts paper'
+        else{
+            console.log('You lose! Scissors cuts paper')
+            return false;
+        } 
     }
     else if (playerSelection === 'scissors'){
         if (computerSelection === 'rock'){
-            return 'You lose! Rock beats scissors'
+            console.log('You lose! Rock beats scissors')
+            return false;
         }
-        else return 'You win! Scissors cuts paper'
+        else{
+            console.log('You win! Scissors cuts paper')
+            return true;
+        }
     }
-    else return 'Huh? Enter rock, paper, or scissors'
+    else{
+        console.log('Huh? Enter rock, paper, or scissors')
+        return false;
     }
+}
 
-console.log(oneRound('rOck', getComputerChoice()))
+function game(){
+    let playerWins = 0;
+    for (let i = 0; i < 5; i++){
+        let playerSelection = prompt('Rock, Paper, Scissors, and shoot:');
+        let winner = oneRound(playerSelection, getComputerChoice());
+        if (winner) playerWins++;
+    }
+    playerWins >= 3 
+    ? console.log(`You won ${playerWins} rounds! You win!`) 
+    : console.log(`You won ${playerWins} round(s). You didn't win.`)
+}
+
+game();
