@@ -1,3 +1,22 @@
+/*
+Get the button
+when the button is clicked, set playerSelection equal to that button's class?
+get computer choice
+run playround with player selection and computer choice
+^DONE!
+next:
+refactor oneRound to update DOM instead of console
+*/
+
+const choices = document.querySelectorAll('button');
+
+choices.forEach(choice => {
+    choice.addEventListener('click', (e) => {
+        const playerSelection = e.target.className;
+        oneRound(playerSelection, getComputerChoice());
+    })
+});
+
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3 + 1);
     switch (choice){
@@ -55,6 +74,7 @@ function oneRound(playerSelection, computerSelection){
     }
 }
 
+/*
 function game(){
     let playerWins = 0;
     for (let i = 0; i < 5; i++){
@@ -68,3 +88,4 @@ function game(){
 }
 
 game();
+*/
