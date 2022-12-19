@@ -27,7 +27,7 @@ choices.forEach(choice => {
         runningTotal.textContent = `W: ${wins} L: ${losses} D: ${draws}`
         choiceContainer.appendChild(runningTotal);
         if (wins === 5 || losses === 5) {
-            let resultString = wins > losses ? `That's 5 wins! You're the champion!` : `That's 5 losses. Computer wins, pal`;
+            let resultString = wins > losses ? `That's 5 wins! You're an RPS champion!` : `That's 5 losses. Guess computer beats person`;
             gameOver.textContent = resultString;
             choiceContainer.appendChild(gameOver);
         }
