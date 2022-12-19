@@ -10,6 +10,7 @@ refactor oneRound to update DOM instead of console
 
 const choices = document.querySelectorAll(".choice");
 const choiceContainer = document.querySelector(".choiceContainer");
+const resultsContainer = document.querySelector(".resultsContainer");
 const roundResult = document.createElement("div");
 const runningTotal = document.createElement("div");
 const gameOver = document.createElement("div");
@@ -25,12 +26,10 @@ choices.forEach(choice => {
         else if (oneResult > 0) wins++;
         else if (oneResult < 0) losses++;
         runningTotal.textContent = `W: ${wins} L: ${losses} D: ${draws}`
-        choiceContainer.appendChild(runningTotal);
+        resultsContainer.appendChild(runningTotal);
         if (wins === 5 || losses === 5) {
-            let resultString = wins > losses ? `That's 5 wins! You're an RPS champion!` : `That's 5 losses. Guess computer beats person`;
-            gameOver.textContent = resultString;
-            choiceContainer.appendChild(gameOver);
-            disableChoices();
+            endGame(wins, losses);
+            resetGame();
         }
     })
 });
@@ -38,6 +37,32 @@ choices.forEach(choice => {
 function disableChoices(){
     choices.forEach(choice => {
         choice.disabled = true;
+    })
+}
+
+function enableChoices(){
+    choices.forEach(choice => {
+        choice.disabled = false;
+    })
+}
+
+function endGame(w, l){
+    let resultString = w > l ? `That's 5 wins! You're an RPS champion!` : `That's 5 losses. Guess computer beats person`;
+    gameOver.textContent = resultString;
+    resultsContainer.appendChild(gameOver);
+    disableChoices();
+}
+
+function resetGame(){
+    const restartButton = document.createElement("button");
+    restartButton.textContent = "Play again"
+    resultsContainer.appendChild(restartButton);
+    restartButton.addEventListener("click", (e) => {
+        wins = losses = draws = 0;
+        enableChoices();
+        while (resultsContainer.firstChild) {
+            resultsContainer.removeChild(resultsContainer.firstChild);
+        }
     })
 }
 
@@ -60,42 +85,42 @@ function oneRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection){
         roundResult.textContent = "Draw! Play again!";
-        choiceContainer.appendChild(roundResult);
+        resultsContainer.appendChild(roundResult);
         return 0;
     }
     else if (playerSelection === "rock"){
         if (computerSelection === "scissors"){
             roundResult.textContent = "You win! Rock beats scissors";
-            choiceContainer.appendChild(roundResult);
+            resultsContainer.appendChild(roundResult);
             return 1;
         }
         else{
             roundResult.textContent = "You lose! Paper covers rock";
-            choiceContainer.appendChild(roundResult);
+            resultsContainer.appendChild(roundResult);
             return -1;
         }
     }
     else if (playerSelection === "paper"){
         if (computerSelection === "rock"){
             roundResult.textContent = "You win! Paper covers rock";
-            choiceContainer.appendChild(roundResult);
+            resultsContainer.appendChild(roundResult);
             return 1;
         }
         else{
             roundResult.textContent = "You lose! Scissors cuts paper";
-            choiceContainer.appendChild(roundResult);
+            resultsContainer.appendChild(roundResult);
             return -1;
         } 
     }
     else if (playerSelection === "scissors"){
         if (computerSelection === "rock"){
             roundResult.textContent = "You lose! Rock beats scissors";
-            choiceContainer.appendChild(roundResult);
+            resultsContainer.appendChild(roundResult);
             return -1;
         }
         else{
             roundResult.textContent = "You win! Scissors cuts paper";
-            choiceContainer.appendChild(roundResult);
+            resultsContainer.appendChild(roundResult);
             return 1;
         }
     }
