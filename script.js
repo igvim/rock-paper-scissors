@@ -30,9 +30,16 @@ choices.forEach(choice => {
             let resultString = wins > losses ? `That's 5 wins! You're an RPS champion!` : `That's 5 losses. Guess computer beats person`;
             gameOver.textContent = resultString;
             choiceContainer.appendChild(gameOver);
+            disableChoices();
         }
     })
 });
+
+function disableChoices(){
+    choices.forEach(choice => {
+        choice.disabled = true;
+    })
+}
 
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3 + 1);
