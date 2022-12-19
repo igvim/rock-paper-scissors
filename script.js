@@ -125,19 +125,3 @@ function oneRound(playerSelection, computerSelection){
         }
     }
 }
-
-/*
-function game(){
-    let playerWins = 0;
-    for (let i = 0; i < 5; i++){
-        let playerSelection = prompt("Rock, Paper, Scissors, and shoot:");
-        let winner = oneRound(playerSelection, getComputerChoice());
-        if (winner) playerWins++;
-    }
-    playerWins >= 3 
-    ? console.log(`You won ${playerWins} rounds! You win!`) 
-    : console.log(`You won ${playerWins} round(s). You didn"t win.`)
-}
-
-game();
-*/
