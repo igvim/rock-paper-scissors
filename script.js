@@ -21,10 +21,7 @@ let draws = 0;
 choices.forEach(choice => {
     choice.addEventListener("click", (e) => {
         const playerSelection = e.target.id;
-        let oneResult = oneRound(playerSelection, getComputerChoice());
-        if (oneResult === 0) draws++;
-        else if (oneResult > 0) wins++;
-        else if (oneResult < 0) losses++;
+        oneRound(playerSelection, getComputerChoice());
         runningTotal.textContent = `W: ${wins} L: ${losses} D: ${draws}`
         resultsContainer.appendChild(runningTotal);
         if (wins === 5 || losses === 5) {
@@ -84,44 +81,44 @@ function getComputerChoice(){
 function oneRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection){
+        draws++;
         roundResult.textContent = "Draw! Play again!";
         resultsContainer.appendChild(roundResult);
-        return 0;
     }
     else if (playerSelection === "rock"){
         if (computerSelection === "scissors"){
             roundResult.textContent = "You win! Rock beats scissors";
             resultsContainer.appendChild(roundResult);
-            return 1;
+            wins++;
         }
         else{
             roundResult.textContent = "You lose! Paper covers rock";
             resultsContainer.appendChild(roundResult);
-            return -1;
+            losses++;
         }
     }
     else if (playerSelection === "paper"){
         if (computerSelection === "rock"){
             roundResult.textContent = "You win! Paper covers rock";
             resultsContainer.appendChild(roundResult);
-            return 1;
+            wins++;
         }
         else{
             roundResult.textContent = "You lose! Scissors cuts paper";
             resultsContainer.appendChild(roundResult);
-            return -1;
+            losses++;
         } 
     }
     else if (playerSelection === "scissors"){
         if (computerSelection === "rock"){
             roundResult.textContent = "You lose! Rock beats scissors";
             resultsContainer.appendChild(roundResult);
-            return -1;
+            losses++;
         }
         else{
             roundResult.textContent = "You win! Scissors cuts paper";
             resultsContainer.appendChild(roundResult);
-            return 1;
+            wins++;
         }
     }
 }
